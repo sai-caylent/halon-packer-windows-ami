@@ -1,4 +1,4 @@
-name: "Terraform action"
+name: "Packer Build"
 on:
   push:
     branches:
@@ -13,7 +13,7 @@ env:
   TF_LOG: INFO
   AWS_REGION: ${{ secrets.AWS_REGION }}
 jobs:
-  deploy:
+  build:
     runs-on: ubuntu-latest
     defaults:
       run:
