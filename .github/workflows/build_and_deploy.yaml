@@ -48,4 +48,11 @@ jobs:
 
       - name: Run `packer build`
         id: build
-        run: "packer build ./windows.pkr.hcl"
+        run: |
+          packer build ./windows.pkr.hcl | tee build_output.txt
+          AMI_ID=$(grep -oP 'ami-\w+' build_output.txt | tail -1)
+          echo "AMI_ID=$AMI_ID" >> $GITHUB_ENV
+
+      - name: Update SSM Parameter
+        run: |
+          aws ssm put-parameter --name "/halon/packer/windows/image" --value "${{ env.AMI_ID }}" --type "String" --overwrite
