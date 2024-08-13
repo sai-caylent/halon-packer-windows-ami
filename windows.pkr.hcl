@@ -40,10 +40,6 @@ build {
   name    = "learn-packer"
   sources = ["source.amazon-ebs.firstrun-windows"]
 
-  provisioner "powershell" {
-    environment_vars = ["DEVOPS_LIFE_IMPROVER=PACKER"]
-    inline           = ["Write-Host \"HELLO NEW USER; WELCOME TO $Env:DEVOPS_LIFE_IMPROVER\"", "Write-Host \"You need to use backtick escapes when using\"", "Write-Host \"characters such as DOLLAR`$ directly in a command\"", "Write-Host \"or in your own scripts.\""]
-  }
   provisioner "windows-restart" {
   }
   provisioner "powershell" {
